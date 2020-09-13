@@ -8,7 +8,7 @@ SRC_URI = " \
     file://couchdb.service \
 "
 
-inherit autotools-brokensep systemd
+inherit autotools-brokensep erlang systemd
 
 # couchdb supports: 1.8.5, 60, 68
 SPIDERMONKEY_VERSION = "60"
@@ -29,8 +29,9 @@ do_install_append() {
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/couchdb.service ${D}${systemd_system_unitdir}
 
-    install -d ${D}/opt
-    cp -r ${B}/rel/couchdb ${D}/opt
+    install -d ${D}/opt/couchdb
+    cp -r ${B}/rel/couchdb/bin ${D}/opt/couchdb
+    cp -r ${B}/rel/couchdb/etc ${D}/opt/couchdb
 
     install -d ${D}/var/lib/couchdb
     install -d ${D}/var/volatile/log/couchdb
@@ -45,7 +46,11 @@ FILES_${PN} = " \
 
 DEPENDS += " \
     curl \
+    erlang \
     erlang-native \
     icu \
     mozjs \
+    rebar-native \
 "
+
+INSANE_SKIP_${PN} = "ldflags"
