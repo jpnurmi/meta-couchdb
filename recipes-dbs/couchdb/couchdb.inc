@@ -25,13 +25,22 @@ do_configure_append() {
     sed -i "s:-L/usr/local/lib:-L${STAGING_LIBDIR}:g" ${B}/src/couch/rebar.config.script
 }
 
-do_install() {
+do_install_append() {
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/couchdb.service ${D}${systemd_system_unitdir}
+
+    install -d ${D}/opt
+    cp -r ${B}/rel/couchdb ${D}/opt
+
+    install -d ${D}/var/lib/couchdb
+    install -d ${D}/var/volatile/log/couchdb
 }
 
 FILES_${PN} = " \
     ${systemd_system_unitdir} \
+    /opt/couchdb \
+    /var/lib/couchdb \
+    /var/volatile/log/couchdb \
 "
 
 DEPENDS += " \
