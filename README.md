@@ -1,15 +1,4 @@
-# CouchDB Yocto layer
+# CouchDB Yocto layer (obsolete)
 
-https://couchdb.apache.org/
-
-## Dependencies
-
-- URI: https://github.com/openembedded/bitbake.git
-
-- URI: https://github.com/openembedded/openembedded-core.git
-  - layers: meta
-
-- URI: https://github.com/openembedded/meta-openembedded.git
-  - layers: meta-oe
-
-- URI: https://github.com/joaohf/meta-erlang.git
+A Yocto recipe for CouchDB is now available in [meta-erlang](https://github.com/meta-erlang/meta-erlang):
+- https://github.com/meta-erlang/meta-erlang/pull/55
